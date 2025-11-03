@@ -3,7 +3,7 @@ const registrationController = require('../../../controllers/registrationControl
 const _ = express.Router()
 
 
-
 _.post('/registration', registrationController)
+
 
 module.exports = _
