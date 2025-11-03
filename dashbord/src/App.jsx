@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 const App = () => {
 
@@ -18,6 +19,11 @@ const App = () => {
         }
       }
     )
+    if(data.data.error){
+      toast.error("Email Already Exist!!!")
+    }else{
+      toast.success("Registration Successfull!!!")
+    }
 
   };
 
@@ -26,16 +32,29 @@ const App = () => {
   };
 
   return (
+    
      <Form
-    name="basic"
-    labelCol={{ span: 8 }}
-    wrapperCol={{ span: 16 }}
-    style={{ maxWidth: 600 }}
-    initialValues={{ remember: true }}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
-  >
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+     >
+    <ToastContainer
+    position="top-right"
+    autoClose={2000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick={false}
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+    />
     <Form.Item
       label="Username"
       name="username"

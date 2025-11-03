@@ -4,9 +4,11 @@ const passwordRegexUpperCase = require("../helpers/passwordRegexUpperCase")
 const passwordRegexDigit = require("../helpers/passwordRegexDigit")
 const passwordRegexSpecialChar = require("../helpers/passwordRegexSpecialChar")
 const passwordRegexLength = require("../helpers/passwordRegexLength")
-const Userlist = require("../models/userSchema");
+const Userlist = require("../models/userSchema")
+const bcrypt = require('bcrypt')
+const emailVerification = require("../helpers/emailVerification")
 
-const registrationController =(req, res)=>{
+const registrationController =async(req, res)=>{
     let {username, email, password} = req.body
     
     if(!username){
@@ -30,14 +32,25 @@ const registrationController =(req, res)=>{
         res.send({error:"Ensures the password is at least 8 characters long."})  
     }
     else{
-        res.send({success:"Registration Complete"})
-        let data = new Userlist({
-            username,
-            email,
-            password
-        })
-        data.save()
-        res.send({success:"Registration Done!"})
+        //Finding Duplicate Email
+        let existingUser = await Userlist.find({email:email})
+
+        if(existingUser.length>0){
+            res.send({error:"Email already exist!"})
+        }else{
+            //Coverting password to hash
+        bcrypt.hash(password, 10, function(err, hash) { 
+            //Add Data to Database       
+            let data = new Userlist({
+                username:username,
+                email:email,
+                password:hash
+            })
+            data.save()
+            res.send({success:"Registration Done!"})
+            emailVerification(email)
+        });
+        }
     }
 }
 
