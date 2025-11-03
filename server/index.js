@@ -8,8 +8,10 @@ const port = 3000
 
 mongodbConfig()
 
+app.use(cors())
 app.use(express.json())
 app.use(route)
+
 
 
 app.listen(port, () => {

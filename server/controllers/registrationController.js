@@ -37,7 +37,7 @@ const registrationController =(req, res)=>{
             password
         })
         data.save()
-        res.send(data)
+        res.send({success:"Registration Done!"})
     }
 }
 
