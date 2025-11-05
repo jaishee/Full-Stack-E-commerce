@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const emailVerification=async(email)=>{
+const emailVerification=async(email,otp)=>{
     const transporter = nodemailer.createTransport({
         service:"gmail",
         auth: {
@@ -18,7 +18,7 @@ const emailVerification=async(email)=>{
         text-align:center"><h1>E-commerce</h1><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
         Cupiditate, officia quas?</p><a href=""style="background:#5d10a5;color:#fff;padding:12px 8px;
         border-radius:5px;border:none;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;
-        margin:10px 0">Submit</a><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat iusto 
+        margin:10px 0">${otp}</a><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat iusto 
         explicabo provident pariatur sint vel eius, molestias sed maxime ex fuga, magnam error. Veritatis 
         mollitia enim nostrum asperiores? Quisquam, sequi. Provident consequatur omnis ducimus enim pariatur 
         cum. Dolor distinctio tempora commodi, omnis, ab ipsam doloribus corporis voluptates expedita deleniti 

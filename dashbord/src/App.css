@@ -1,0 +1,127 @@
+/* Registration page design start*/
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, #742ce7c5, #f7e92993);
+  font-family: "Poppins", sans-serif;
+}
+
+/* Glass form card */
+.glass-card {
+  width: 380px;
+  padding: 35px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+/* Title styling */
+.form-title {
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+/* Input field style */
+.input-field {
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Change form label color + font size */
+.ant-form-item-label > label {
+  color: #ffffff !important;  /* white label */
+  font-size: 16px !important; /* change size here */
+  font-weight: 600;
+}
+/* Submit Button */
+.submit-btn {
+  height: 42px;
+  font-size: 18px;
+  border-radius: 20px;                  /* rounded corners */
+  background: #742ce7; /* semi-transparent glass */
+  color: #ffffff;
+  border: 1px solid transparent; /* subtle border */
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.submit-btn:hover {
+  background: rgba(255, 255, 255, 0.25) !important; /* slightly brighter */
+  border: 1px solid #742ce7; /* subtle highlight */
+  cursor: pointer;
+  color: #742ce7 !important;
+}
+
+/* Active click effect */
+.submit-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+/* Registration page design end*/
+
+/* OPT page design start */
+.otp-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff; /* white background */
+  font-family: "Poppins", sans-serif;
+}
+
+/* Page title */
+.otp-title {
+  color: #333333; /* dark text for contrast */
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+/* Input field */
+.input-field,
+.ant-input {
+  border-radius: 10px !important;
+  border: 1px solid #ccc;
+  color: #000000; /* text color inside input */
+}
+
+/* Form label style */
+.ant-form-item-label > label {
+  color: #000000 !important;  /* black label */
+  font-size: 16px !important;
+  font-weight: 600;
+}
+
+/* Button */
+.submit-btn {
+  height: 42px;
+  font-size: 16px;
+  border-radius: 20px;
+  background: #742ce7;
+  color: #ffffff;
+  border: 1px solid transparent;
+  font-weight: 600;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #ffffff;
+  color: #742ce7;
+  border: 1px solid #742ce7;
+  cursor: pointer;
+}
+
+.submit-btn:active {
+  background: #e6e6e6;
+}
+/* OPT page design End */

@@ -7,6 +7,7 @@ const passwordRegexLength = require("../helpers/passwordRegexLength")
 const Userlist = require("../models/userSchema")
 const bcrypt = require('bcrypt')
 const emailVerification = require("../helpers/emailVerification")
+const otpGenerator = require('otp-generator')
 
 const registrationController =async(req, res)=>{
     let {username, email, password} = req.body
@@ -38,18 +39,28 @@ const registrationController =async(req, res)=>{
         if(existingUser.length>0){
             res.send({error:"Email already exist!"})
         }else{
+
+            //OTP Generation
+            let otp = otpGenerator.generate(6, { 
+                upperCase: false, 
+                specialChars: false,
+                alphabets: false,
+            });
+
             //Coverting password to hash
-        bcrypt.hash(password, 10, function(err, hash) { 
+            bcrypt.hash(password, 10, function(err, hash) {
+
             //Add Data to Database       
-            let data = new Userlist({
-                username:username,
-                email:email,
-                password:hash
-            })
-            data.save()
-            res.send({success:"Registration Done!"})
-            emailVerification(email)
-        });
+                let data = new Userlist({
+                    username:username,
+                    email:email,
+                    password:hash,
+                    otp:otp
+                })
+                data.save()
+                res.send({success:"Registration Done!"})
+                emailVerification(email,otp)
+            });
         }
     }
 }
