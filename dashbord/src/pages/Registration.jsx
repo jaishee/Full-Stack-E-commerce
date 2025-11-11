@@ -1,17 +1,17 @@
 import React from 'react'
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Flex, Checkbox } from "antd";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../App.css"; 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Registration = () => {
     let navigate = useNavigate()
     const onFinish = async (values) => {
     try {
       let data = await axios.post(
-        "http://localhost:3000/api/v1/authentication/registration",
+        "http://localhost:8000/api/v1/authentication/registration",
         {
           username: values.username,
           email: values.email,
@@ -40,7 +40,7 @@ const Registration = () => {
     <div className="container">
       <ToastContainer autoClose={2000} theme="light" />
 
-      <div className="glass-card">
+      <div className="card">
         <h2 className="form-title">Create an Account</h2>
 
         <Form name="basic" layout="vertical" onFinish={onFinish}>
@@ -69,12 +69,12 @@ const Registration = () => {
           >
             <Input size="large" className="input-field" placeholder="Enter your password" />
           </Form.Item>
-
           <Form.Item>
-            <Button type="primary" htmlType="submit" block className="submit-btn">
+            <Button type="primary" htmlType="submit" block className="registration-btn">
               Register
             </Button>
           </Form.Item>
+          <Link to={'/forgetpassword'}><p className='cursor-pointer ml-25'>Forget Password?</p></Link>
         </Form>
       </div>
     </div>

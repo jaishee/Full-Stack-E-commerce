@@ -1,151 +1,114 @@
-/* Registration page design start*/
+/* Dashboard Design Start */
+/* Registration container */
 .container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(120deg, #742ce7c5, #f7e92993);
+  background-color: #003049; /* dark navy */
   font-family: "Poppins", sans-serif;
 }
 
-/* Glass form card */
-.glass-card {
+/* Card */
+.card {
   width: 380px;
   padding: 35px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background-color: #FCFFFD; /* white card */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #FCFFFD; /* light teal border */
 }
 
-/* Title styling */
+/* Title */
 .form-title {
-  color: white;
+  color: #003049; /* dark text */
   text-align: center;
   margin-bottom: 25px;
   font-weight: 600;
   font-size: 22px;
 }
 
-/* Input field style */
+/* Input field */
 .input-field {
   border-radius: 10px !important;
-  background: rgba(255, 255, 255, 0.4);
+  background: #FCFFFD; /* light teal input */
+  border: 1px solid #003049; /* dark border */
+  color: #003049;
 }
 
-/* Change form label color + font size */
+/* Labels */
 .ant-form-item-label > label {
-  color: #ffffff !important;  /* white label */
-  font-size: 16px !important; /* change size here */
-  font-weight: 600;
-}
-/* Submit Button */
-.submit-btn {
-  height: 42px;
-  font-size: 18px;
-  border-radius: 20px;                  /* rounded corners */
-  background: #742ce7; /* semi-transparent glass */
-  color: #ffffff;
-  border: 1px solid transparent; /* subtle border */
-  font-weight: 600;
-  width: 100%;
-  transition: all 0.3s ease;
-}
-
-/* Hover effect */
-.submit-btn:hover {
-  background: rgba(255, 255, 255, 0.25) !important; /* slightly brighter */
-  border: 1px solid #742ce7; /* subtle highlight */
-  cursor: pointer;
-  color: #742ce7 !important;
-}
-
-/* Active click effect */
-.submit-btn:active {
-  background: rgba(255, 255, 255, 0.3);
-}
-/* Registration page design end*/
-
-/* OPT page design start */
-.otp-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff; /* white background */
-  font-family: "Poppins", sans-serif;
-}
-
-/* Page title */
-.otp-title {
-  color: #333333; /* dark text for contrast */
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 25px;
-}
-
-/* Input field */
-.input-field,
-.ant-input {
-  border-radius: 10px !important;
-  border: 1px solid #ccc;
-  color: #000000; /* text color inside input */
-}
-
-/* Form label style */
-.ant-form-item-label > label {
-  color: #000000 !important;  /* black label */
+  color: #003049 !important;
   font-size: 16px !important;
   font-weight: 600;
 }
 
 /* Button */
-.submit-btn {
+.registration-btn {
   height: 42px;
   font-size: 16px;
   border-radius: 20px;
-  background: #742ce7;
-  color: #ffffff;
-  border: 1px solid transparent;
+  background: #003049; /* dark navy button */
+  color: #FCFFFD; /* white text */
+  border: 1px solid #003049;
   font-weight: 600;
-  width: 100%;
   transition: all 0.3s ease;
 }
 
-.submit-btn:hover {
-  background: #ffffff;
-  color: #742ce7;
-  border: 1px solid #742ce7;
+/* Hover */
+.registration-btn:hover {
+  background: #FCFFFD !important; /* light teal */
+  color: #003049 !important; /* dark text */
+  border: 1px solid #003049 !important;
   cursor: pointer;
 }
 
-.submit-btn:active {
-  background: #e6e6e6;
-}
-.otp-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
+/* Active click */
+.registration-btn:active {
+  background: #003049;
+  color: #FCFFFD;
+  border: 1px solid #003049;
 }
 
-.loader {
-  border: 6px solid #f3f3f3; /* Light grey */
-  border-top: 6px solid #5d10a5; /* Primary color */
+/* Spinner Desaign Start */
+/* OTP / Loader Container */
+.otp-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  flex-direction: column;  /* spinner + text if any */
+  background-color: #FCFFFD; /* optional page background */
+}
+
+/* Spinner  Design Start*/
+
+/* OTP / Loader Container */
+.otp-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  flex-direction: column;  /* spinner + text if any */
+  background-color: #FCFFFD; /* optional page background */
+}
+
+/* Spinner */
+.spinner {
+  border: 8px solid #f3f3f3; /* Light background */
+  border-top: 8px solid #003049; /* primary spinner color */
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  animation: spin 0.8s linear infinite;
-  margin-bottom: 10px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
 }
 
 @keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* OPT page design End */
+/* Spinner Design End */
+
+/* Dashboard Design End */

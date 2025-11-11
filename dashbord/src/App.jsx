@@ -3,6 +3,8 @@ import {createRoutesFromElements,createBrowserRouter,Route,RouterProvider,} from
 import Registration from './pages/Registration';
 import OTP from './pages/OTP';
 import Login from './pages/login';
+import ForgetPassword from './pages/ForgetPassword';
+import ResetPassword from './pages/ResetPassword';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -10,6 +12,8 @@ const router = createBrowserRouter(
     <Route path="/" element={<Registration />}></Route>
     <Route path="/verify-email/:token" element={<OTP />}></Route>
     <Route path="/login" element={<Login />}></Route>
+    <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
+    <Route path="/resetpassword/:email" element={<ResetPassword />}></Route>
     </>
   )
 );
