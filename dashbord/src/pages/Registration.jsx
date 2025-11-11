@@ -27,10 +27,10 @@ const Registration = () => {
       if (data.data.error) {
         toast.error("Email Already Exist!!!");
       } else {
-        toast.success("Registration Successfull!!!");
-        setTimeout(()=>{
-            navigate(`/otp/${values.email}`)
-        },3000)
+        toast.warn("Please verify your email");
+        // setTimeout(()=>{
+        //     navigate(`/otp/${values.email}`)
+        // },3000)
       }
     } catch (error) {
       toast.error("Something went wrong!");

@@ -1,29 +1,29 @@
 const nodemailer = require("nodemailer");
 
-const emailVerification=async(email,otp)=>{
-    const transporter = nodemailer.createTransport({
-        service:"gmail",
-        auth: {
-            user: "jahidaalam6@gmail.com",
-            pass: "bdsyieqvbtewlfqd",
-        },
-    });
+const emailVerification = async (email, token) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "jahidaalam6@gmail.com",
+      pass: "bdsyieqvbtewlfqd",
+    },
+  });
 
-    const info = await transporter.sendMail({
-        from: '"E-commerce" <jahidaalam6@gmail.com>',
-        to: email,
-        subject: "E-commerce",
-        text: "Hello world?", // plain‑text body
-        html: `<div style="background:#dbf3f0;width:500px;padding:80px 50px;border-radius:15px;
-        text-align:center"><h1>E-commerce</h1><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
-        Cupiditate, officia quas?</p><a href=""style="background:#5d10a5;color:#fff;padding:12px 8px;
-        border-radius:5px;border:none;font-size:14px;font-weight:600;text-decoration:none;display:inline-block;
-        margin:10px 0">${otp}</a><p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat iusto 
-        explicabo provident pariatur sint vel eius, molestias sed maxime ex fuga, magnam error. Veritatis 
-        mollitia enim nostrum asperiores? Quisquam, sequi. Provident consequatur omnis ducimus enim pariatur 
-        cum. Dolor distinctio tempora commodi, omnis, ab ipsam doloribus corporis voluptates expedita deleniti 
-        voluptatum?</p><a href=""><img alt=""src=https://i.ibb.co.com/7ttx4cf0/Google.png style=width:20px></a></div>`, // HTML body
-    });
-}
+  await transporter.sendMail({
+    from: '"E-commerce" <jahidaalam6@gmail.com>',
+    to: email,
+    subject: "Email Verification",
+    html: `
+      <div style="max-width:500px;margin:auto;padding:40px;background:#f5f7fa;border-radius:12px;text-align:center;font-family:Arial,sans-serif">
+        <h2 style="color:#333;margin-bottom:10px">Email Verification</h2>
+        <p style="color:#555;font-size:14px;line-height:20px">Please click the button below to verify your email.</p>
+        <a href="http://localhost:5173/verify-email/${token}" 
+           style="display:inline-block;background:#5d10a5;color:#fff;padding:12px 25px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:600">
+           Verify Email
+        </a>
+        <p style="color:#888;font-size:12px;margin-top:25px">If you didn't request this email, you can ignore it.</p>
+      </div>`
+  });
+};
 
-module.exports = emailVerification
+module.exports = emailVerification;

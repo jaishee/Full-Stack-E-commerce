@@ -1,55 +1,48 @@
-import React from "react";
-import { Button, Form, Input } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
-import "../App.css";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
+import "../App.css";
 
 const OTP = () => {
-  const params = useParams();
+  const { token } = useParams(); // JWT token from URL
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-  const onFinish = async (values) => {
-    try {
-      await axios.post("http://localhost:3000/api/v1/authentication/otp", {
-        email: params.email,
-        otp: values.otp,
-      });
-      toast.success("OTP Verified Successfully!");
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-    } catch (error) {
-      toast.error("Invalid OTP or server error!");
+  useEffect(() => {
+    async function verifyEmail() {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/v1/authentication/verify-email/${token}`
+        );
+
+        const result = await response.text(); // or response.json() if backend returns JSON
+
+        if (result === "Email verified successfully!") {
+          toast.success("Email Verification Successful!");
+          setTimeout(() => navigate("/login"), 2000);
+        } else {
+          toast.error("Verification Unsuccessful!");
+        }
+      } catch (err) {
+        toast.error("Server Error. Try again!");
+      } finally {
+        setLoading(false); // Stop loader
+      }
     }
-  };
+
+    verifyEmail();
+  }, [token, navigate]);
 
   return (
     <div className="otp-container">
       <ToastContainer autoClose={2000} theme="light" />
-      <h2 className="otp-title">Enter OTP</h2>
-      <Form
-        name="otpForm"
-        layout="vertical"
-        onFinish={onFinish}
-        autoComplete="off"
-        style={{ width: "300px" }}
-      >
-        <Form.Item
-          label="OTP"
-          name="otp"
-          rules={[{ required: true, message: "Please enter OTP" }]}
-        >
-          <Input size="large" placeholder="Enter OTP here" />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit" block className="submit-btn">
-            Verify
-          </Button>
-        </Form.Item>
-      </Form>
+      {loading ?
+        <div className="loader"></div>
+        :
+        // Show while verifying : 
+        <div className="loader"></div>
+      }
     </div>
   );
 };

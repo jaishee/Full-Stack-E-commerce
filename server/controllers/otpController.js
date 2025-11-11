@@ -1,19 +1,25 @@
-const Userlist = require("../models/userSchema")
+const Userlist = require("../models/userSchema");
+const jwt = require("jsonwebtoken");
 
 const otpController =async(req,res)=>{
-    let {email, otp} = req.body
-    let existingUser = await Userlist.findOne({
-        email:email
-    })
+    const { token } = req.params;
 
-    if(existingUser){
-        if(existingUser.otp==otp){
-            await Userlist.findOneAndUpdate({email:email},{otp:""})
-        }else{
-            console.log("Doesn't matched")
-        }
-    }else{
-        console.log("Credential Account")
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || "mysecretkey");
+        const { email, otp } = decoded;
+
+        const user = await Userlist.findOne({ email });
+        if (!user) return res.send("User not found");
+        if (user.isEmailVerified) return res.send("Email already verified");
+        if (user.otp !== otp) return res.send("Invalid OTP");
+
+        user.isEmailVerified = true;
+        user.otp = "";
+        await user.save();
+
+        res.send("Email verified successfully!");
+    } catch (err) {
+        res.send("Token expired or invalid!");
     }
 }
 

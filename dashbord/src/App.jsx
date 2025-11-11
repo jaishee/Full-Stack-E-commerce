@@ -8,7 +8,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
     <Route path="/" element={<Registration />}></Route>
-    <Route path="/otp/:email" element={<OTP />}></Route>
+    <Route path="/verify-email/:token" element={<OTP />}></Route>
     <Route path="/login" element={<Login />}></Route>
     </>
   )

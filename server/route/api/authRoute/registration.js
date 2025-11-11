@@ -7,5 +7,6 @@ const _ = express.Router()
 
 _.post('/registration', secureAPI, registrationController)
 _.post('/otp', otpController)
+_.get("/verify-email/:token", otpController);
 
 module.exports = _
