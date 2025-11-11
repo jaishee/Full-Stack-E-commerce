@@ -13,7 +13,7 @@ const router = createBrowserRouter(
     <Route path="/verify-email/:token" element={<OTP />}></Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/forgetpassword" element={<ForgetPassword />}></Route>
-    <Route path="/resetpassword/:email" element={<ResetPassword />}></Route>
+    <Route path="/resetpassword/:token" element={<ResetPassword />}></Route>
     </>
   )
 );

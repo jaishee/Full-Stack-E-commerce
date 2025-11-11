@@ -1,62 +1,70 @@
-import React from 'react'
-import { Button, Checkbox, Form, Input } from 'antd';
-import axios from 'axios'
-import {useParams,useNavigate} from "react-router-dom"
+import React from 'react';
+import { Button, Form, Input } from 'antd';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { validatePassword } from '../../helpers/passwordValidation';
 
 const ResetPassword = () => {
+  const params = useParams();
+  const navigate = useNavigate();
 
-    let params = useParams()
-    const navigate = useNavigate()
+  const onFinish = async (values) => {
+    try {
+      const data = await axios.post(
+        `http://localhost:8000/api/v1/authentication/resetpassword`,
+        { token: params.token, newpassword: values.password }
+      );
 
-    const onFinish = async values => {
-        let data = await axios.post(`http://localhost:8000/api/v1/authentication/resetpassword`,{
-            email:params.email,
-            newpassword:values.password
-        })
-
-        console.log(data)
-
-        if(data.data.success === "Reset Password"){
-            toast.success("Password reset successfull!")
-            setTimeout(() => navigate("/login"), 2000);
-        }else{
-            toast.error("Credential Invalid!")
-        }
-    };
-    const onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
-    };
+      if (data.data.success === "Reset Password") {
+        toast.success("Password reset successful!");
+        setTimeout(() => navigate("/login"), 2000);
+      } else {
+        toast.error("Invalid or expired link!");
+      }
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
+  };
 
   return (
     <div>
-        <ToastContainer autoClose={2000} theme="light" />
-    <Form
-        name="basic"
+      <ToastContainer autoClose={2000} theme="light" />
+      <Form
+        name="reset-password"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
-    >
+      >
         <Form.Item
-        label="New Password"
-        name="password"
-        rules={[{ required: true, message: 'Please enter your new password!' }]}
+          label="New Password"
+          name="password"
+          rules={[
+            { required: true, message: 'Please enter your new password!' },
+            {
+              validator: (_, value) => {
+                if (!value) return Promise.resolve();
+                const error = validatePassword(value);
+                if (error) return Promise.reject(error);
+                return Promise.resolve();
+              }
+            }
+          ]}
         >
-        <Input />
+          <Input type='password' />
         </Form.Item>
 
-        <Form.Item label={null}>
-        <Button type="primary" className='ml-50' htmlType="submit">
-            Send
-        </Button>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Button type="primary" htmlType="submit">
+            Reset Password
+          </Button>
         </Form.Item>
-    </Form>
+      </Form>
     </div>
-  )
-}
+  );
+};
 
-export default ResetPassword
+export default ResetPassword;

@@ -11,25 +11,30 @@ const OTP = () => {
   const [loading, setLoading] = useState(true); // loader state
 
   useEffect(() => {
-    const verifyEmail = async () => {
-      const response = await axios
-        .get(`http://localhost:8000/api/v1/authentication/verify-email/${token}`)
-        .catch(() => ({ data: "Server Error" })); // handle error without try/catch
+  const verifyEmail = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:8000/api/v1/authentication/verify-email/${token}`
+      );
 
-      if (response.data === "Email verified successfully!") {
+      console.log(data); // check the response structure
+
+      if (data.message === "Email verified successfully!") {
         toast.success("Email Verification Successful!");
         setTimeout(() => navigate("/login"), 2000);
-      } else if (response.data === "Server Error") {
-        toast.error("Server Error. Try again!");
       } else {
         toast.error("Verification Unsuccessful!");
       }
 
-      setLoading(false); // stop loader
-    };
+    } catch {
+      toast.error("Server Error. Try again!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    verifyEmail();
-  }, [token, navigate]);
+  verifyEmail();
+}, [token, navigate]);
 
   return (
     <div className="otp-container">

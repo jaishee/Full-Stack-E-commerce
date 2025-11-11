@@ -67,7 +67,7 @@ const Registration = () => {
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input size="large" className="input-field" placeholder="Enter your password" />
+            <Input type='password' size="large" className="input-field" placeholder="Enter your password" />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" block className="registration-btn">

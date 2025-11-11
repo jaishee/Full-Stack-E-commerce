@@ -19,6 +19,7 @@ const registrationController =async(req, res)=>{
     }else if(!emailRegex(email)){
         res.send({error:"Please enter a valid email!"})
     }
+    // Password Validations
     else if(!password){
         res.send({error:"Enter you password."})
     }else if(!passwordRegexLowerCase(password)){
